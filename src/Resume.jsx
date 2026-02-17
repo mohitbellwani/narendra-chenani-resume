@@ -14,6 +14,8 @@ export default function Resume() {
     setBtnText('⏳ Generating PDF...');
     setGenerating(true);
 
+    resume.classList.add('print-mode'); // Force desktop layout for PDF
+
     const options = {
       margin: 0,
       filename: 'Narendra_Chenani_Resume.pdf',
@@ -23,8 +25,7 @@ export default function Resume() {
         useCORS: true,
         letterRendering: true,
         logging: false,
-        width: resume.scrollWidth,
-        height: resume.scrollHeight,
+        // Removed explicit width/height to prevent catching overflow
       },
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
       pagebreak: { mode: ['avoid-all'] },
@@ -32,11 +33,13 @@ export default function Resume() {
 
     html2pdf().set(options).from(resume).save()
       .then(() => {
+        resume.classList.remove('print-mode');
         setBtnText('✅ Downloaded!');
         setGenerating(false);
         setTimeout(() => setBtnText('⬇ Download PDF'), 2500);
       })
       .catch(() => {
+        resume.classList.remove('print-mode');
         setBtnText('⬇ Download PDF');
         setGenerating(false);
         alert('PDF generation failed. Please try again.');

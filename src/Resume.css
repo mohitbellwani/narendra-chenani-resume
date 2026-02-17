@@ -26,7 +26,8 @@ body {
 
 .resume {
     width: 210mm;
-    height: 297mm;
+    height: 296.8mm;
+    /* Slight reduction to prevent 1px overflow on PDF generation */
     margin: 20px auto;
     background: var(--white);
     box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.2);
@@ -586,4 +587,37 @@ body {
     .qr-section {
         display: block !important;
     }
+}
+
+/* Force Desktop Layout for PDF Generation on Mobile */
+.resume.print-mode {
+    width: 210mm !important;
+    height: 296.8mm !important;
+    grid-template-columns: 210px 1fr !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    overflow: hidden !important;
+}
+
+/* Ensure sidebar takes full height in print mode */
+.resume.print-mode .sidebar {
+    min-height: 296.8mm !important;
+    height: 100% !important;
+}
+
+/* Restore the decorative line on sidebar */
+.resume.print-mode .sidebar::after {
+    display: block !important;
+}
+
+/* Restore 2-column product grid */
+.resume.print-mode .product-grid {
+    grid-template-columns: 1fr 1fr !important;
+}
+
+/* Hide download button during generation */
+.resume.print-mode~.download-btn,
+.resume.print-mode .download-btn {
+    display: none !important;
 }
