@@ -504,11 +504,31 @@ body {
     }
 }
 
+
+/* ===== MOBILE OPTIMIZATIONS ===== */
+
+/* Default: Hide mobile header on desktop */
+.mobile-header {
+    display: none;
+}
+
 @media (max-width: 768px) {
     .resume {
         width: 100%;
         height: auto;
-        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
+        /* Stack vertically */
+    }
+
+    /* REORDER: Content (2) goes first, Sidebar (1) goes last */
+    .main {
+        order: 1;
+        padding-bottom: 80px;
+    }
+
+    .sidebar {
+        order: 2;
     }
 
     .sidebar::after {
@@ -518,7 +538,27 @@ body {
     .product-grid {
         grid-template-columns: 1fr;
     }
+
+    /* HIDE original header in sidebar on mobile */
+    .sidebar .profile-header {
+        display: none;
+    }
+
+    /* SHOW new mobile header in main content */
+    .mobile-header {
+        display: block;
+        background: var(--primary);
+        /* Maintain branding */
+        color: white;
+        margin: -22px -26px 20px;
+        /* Stretch to edges of main padding */
+        padding: 22px 18px 16px;
+        text-align: center;
+        border-radius: 4px 4px 0 0;
+        /* Rounded top corners if visible */
+    }
 }
+
 
 /* Contact & QR Code */
 .contact-item {

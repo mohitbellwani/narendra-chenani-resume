@@ -145,7 +145,14 @@ export default function Resume() {
         </aside>
 
         {/* ===== MAIN ===== */}
-        <main className="main">
+        <main className="main" style={{ paddingBottom: '80px' }}> {/* Add padding for float button */}
+          {/* Mobile Header (Visible only on small screens) */}
+          <div className="profile-header mobile-header">
+            <div className="profile-initials">NC</div>
+            <div className="profile-name">Narendra Chenani</div>
+            <div className="profile-title">Senior Sales Manager</div>
+          </div>
+
           <div className="summary-banner">
             <div className="summary-label">Career Summary</div>
             <div className="summary-text">
